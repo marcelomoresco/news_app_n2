@@ -13,6 +13,12 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Favoritos"),
+          centerTitle: true,
+          backgroundColor: Colors.black,
+          elevation: 0,
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -31,43 +37,46 @@ class FavoritesPage extends StatelessWidget {
                       child: Text(state.errorMessage),
                     );
                   } else if (state is FavoritesLoadedState) {
-                    return ListView.builder(
-                      itemCount: state.favoritesList.articlesFavorites.length,
-                      itemBuilder: (context, index) {
-                        final article =
-                            state.favoritesList.articlesFavorites[index];
-                        return Slidable(
-                            key: ValueKey(index),
-                            endActionPane: ActionPane(
-                                motion: const ScrollMotion(),
-                                children: [
-                                  SlidableAction(
-                                    backgroundColor: Colors.red,
-                                    icon: Icons.delete,
-                                    label: "Deletar",
-                                    onPressed: (_) {
-                                      context.read<FavoritesBloc>().add(
-                                            RemoveNewsFavoritesEvent(
-                                              article: article,
-                                            ),
-                                          );
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          backgroundColor: Colors.red,
-                                          content: Text(
-                                            "Removido dos favoritos",
-                                            style: TextStyle(
-                                              color: Colors.white,
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height - 60,
+                      child: ListView.builder(
+                        itemCount: state.favoritesList.articlesFavorites.length,
+                        itemBuilder: (context, index) {
+                          final article =
+                              state.favoritesList.articlesFavorites[index];
+                          return Slidable(
+                              key: ValueKey(index),
+                              endActionPane: ActionPane(
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    SlidableAction(
+                                      backgroundColor: Colors.red,
+                                      icon: Icons.delete,
+                                      label: "Deletar",
+                                      onPressed: (_) {
+                                        context.read<FavoritesBloc>().add(
+                                              RemoveNewsFavoritesEvent(
+                                                article: article,
+                                              ),
+                                            );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            backgroundColor: Colors.red,
+                                            content: Text(
+                                              "Removido dos favoritos",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ]),
-                            child: ArticleListTile(article: article));
-                      },
+                                        );
+                                      },
+                                    ),
+                                  ]),
+                              child: ArticleListTile(article: article));
+                        },
+                      ),
                     );
                   } else {
                     return const Center(
