@@ -5,7 +5,7 @@ import '../models/article_model.dart';
 class ApiService {
   final api_url =
       'https://newsapi.org/v2/top-headlines?country=br&category=business&apiKey=48c851ffeb594c48a314133eab017cb9';
-  Dio _dio = Dio();
+  final _dio = Dio();
 
   Future<List<Article>> getBrasilNewsFromApi() async {
     final response = await _dio.get(api_url);

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'favorites_bloc.dart';
 
 abstract class FavoritesState extends Equatable {
@@ -11,7 +12,16 @@ class FavoritesInitialState extends FavoritesState {}
 
 class FavoritesLoadingState extends FavoritesState {}
 
-class FavoritesLoadedState extends FavoritesState {}
+class FavoritesLoadedState extends FavoritesState {
+  final List<Article> articleList;
+
+  const FavoritesLoadedState({
+    required this.articleList,
+  });
+
+  @override
+  List<Object> get props => [articleList];
+}
 
 class FavoritesErrorState extends FavoritesState {
   final String errorMessage;
