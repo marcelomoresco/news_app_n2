@@ -16,7 +16,7 @@ class FavoritesLoadedState extends FavoritesState {
   final FavoritesModel favoritesList;
 
   const FavoritesLoadedState({
-    required this.favoritesList,
+    this.favoritesList = const FavoritesModel(),
   });
 
   @override

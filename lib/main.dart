@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
             ),
         ),
         BlocProvider<FavoritesBloc>(
-          create: (_) => FavoritesBloc(),
+          create: (_) => FavoritesBloc()..add(StartFavoritesEvent()),
         ),
       ],
       child: const MaterialApp(

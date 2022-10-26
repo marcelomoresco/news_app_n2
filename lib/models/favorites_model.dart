@@ -7,7 +7,7 @@ class FavoritesModel extends Equatable {
   final List<Article> articlesFavorites;
 
   const FavoritesModel({
-    required this.articlesFavorites,
+    this.articlesFavorites = const <Article>[],
   });
 
   @override

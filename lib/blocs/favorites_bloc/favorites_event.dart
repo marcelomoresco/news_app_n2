@@ -7,6 +7,8 @@ abstract class FavoritesEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class StartFavoritesEvent extends FavoritesEvent {}
+
 class AddNewsFavoritesEvent extends FavoritesEvent {
   final Article article;
   const AddNewsFavoritesEvent({required this.article});

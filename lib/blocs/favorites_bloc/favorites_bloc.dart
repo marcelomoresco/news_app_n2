@@ -11,6 +11,19 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   FavoritesBloc() : super(FavoritesInitialState()) {
     on<AddNewsFavoritesEvent>(_onAddNewsFavoritesEvent);
     on<RemoveNewsFavoritesEvent>(_onRemoveNewsFavoritesEvent);
+    on<StartFavoritesEvent>(_onStartFavoritesEvent);
+  }
+
+  void _onStartFavoritesEvent(
+      StartFavoritesEvent event, Emitter<FavoritesState> emit) async {
+    emit(FavoritesLoadingState());
+    try {
+      await Future<void>.delayed(const Duration(seconds: 1));
+      emit(const FavoritesLoadedState());
+    } catch (_) {
+      emit(const FavoritesErrorState(
+          errorMessage: "Erro ao Carregar Favoritos"));
+    }
   }
 
   void _onAddNewsFavoritesEvent(
