@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
         BlocProvider<NewsBloc>(
           create: (_) => NewsBloc(
             apiService: ApiService(),
-          ),
+          )..add(
+              StartNewsEvent(),
+            ),
         ),
         BlocProvider<FavoritesBloc>(
           create: (_) => FavoritesBloc(),

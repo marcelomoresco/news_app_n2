@@ -12,6 +12,7 @@ class ApiService {
 
     if (response.statusCode == 200) {
       var result = response.data['articles'] as List;
+      print(result);
       List<Article> articleList = result
           .map(
             (article) => Article.fromJson(article),
