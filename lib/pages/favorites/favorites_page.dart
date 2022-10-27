@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:news_app_n2/blocs/favorites_bloc/favorites_bloc.dart';
+import 'package:news_app_n2/models/article_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/article_list_tile.dart';
@@ -28,10 +29,6 @@ class FavoritesPage extends StatelessWidget {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state is FavoritesInitialState) {
-                    return const Center(
-                      child: Text("Nenhuma noticia favoritada"),
-                    );
                   } else if (state is FavoritesErrorState) {
                     return Center(
                       child: Text(state.errorMessage),
@@ -40,10 +37,9 @@ class FavoritesPage extends StatelessWidget {
                     return SizedBox(
                       height: MediaQuery.of(context).size.height - 60,
                       child: ListView.builder(
-                        itemCount: state.favoritesList.articlesFavorites.length,
+                        itemCount: state.favorites.articles.length,
                         itemBuilder: (context, index) {
-                          final article =
-                              state.favoritesList.articlesFavorites[index];
+                          Article article = state.favorites.articles[index];
                           return Slidable(
                               key: ValueKey(index),
                               endActionPane: ActionPane(

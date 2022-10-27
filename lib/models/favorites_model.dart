@@ -4,12 +4,10 @@ import 'package:equatable/equatable.dart';
 import 'article_model.dart';
 
 class FavoritesModel extends Equatable {
-  final List<Article> articlesFavorites;
+  final List<Article> articles;
 
-  const FavoritesModel({
-    this.articlesFavorites = const <Article>[],
-  });
+  const FavoritesModel({this.articles = const <Article>[]});
 
   @override
-  List<Object?> get props => [articlesFavorites];
+  List<Object?> get props => [articles];
 }

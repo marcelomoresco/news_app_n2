@@ -28,16 +28,13 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
   void _onAddNewsFavoritesEvent(
       AddNewsFavoritesEvent event, Emitter<FavoritesState> emit) {
-    emit(FavoritesLoadingState());
     final state = this.state;
     if (state is FavoritesLoadedState) {
       try {
         emit(
           FavoritesLoadedState(
-            favoritesList: FavoritesModel(
-              articlesFavorites:
-                  List.from(state.favoritesList.articlesFavorites)
-                    ..add(event.article),
+            favorites: FavoritesModel(
+              articles: List.from(state.favorites.articles)..add(event.article),
             ),
           ),
         );
@@ -52,23 +49,21 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
   void _onRemoveNewsFavoritesEvent(
       RemoveNewsFavoritesEvent event, Emitter<FavoritesState> emit) {
-    emit(FavoritesLoadingState());
     final state = this.state;
     if (state is FavoritesLoadedState) {
       try {
         emit(
           FavoritesLoadedState(
-            favoritesList: FavoritesModel(
-              articlesFavorites:
-                  List.from(state.favoritesList.articlesFavorites)
-                    ..remove(event.article),
+            favorites: FavoritesModel(
+              articles: List.from(state.favorites.articles)
+                ..remove(event.article),
             ),
           ),
         );
       } catch (e) {
         emit(
           const FavoritesErrorState(
-              errorMessage: "Erro ao Adicionar esse filme aos Favoritos"),
+              errorMessage: "Erro ao Remover esse filme aos Favoritos"),
         );
       }
     }

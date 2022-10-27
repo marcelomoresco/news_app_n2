@@ -13,14 +13,14 @@ class FavoritesInitialState extends FavoritesState {}
 class FavoritesLoadingState extends FavoritesState {}
 
 class FavoritesLoadedState extends FavoritesState {
-  final FavoritesModel favoritesList;
+  final FavoritesModel favorites;
 
   const FavoritesLoadedState({
-    this.favoritesList = const FavoritesModel(),
+    this.favorites = const FavoritesModel(),
   });
 
   @override
-  List<Object> get props => [favoritesList];
+  List<Object> get props => [favorites];
 }
 
 class FavoritesErrorState extends FavoritesState {
