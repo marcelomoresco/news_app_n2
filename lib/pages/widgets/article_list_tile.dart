@@ -17,8 +17,8 @@ class ArticleListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        if (await canLaunchUrl(Uri.parse(article.url))) {
-          await launchUrl(Uri.parse(article.url));
+        if (await canLaunchUrl(Uri.parse(article.url!))) {
+          await launchUrl(Uri.parse(article.url!));
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -58,7 +58,7 @@ class ArticleListTile extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: article.urlToImage == null
                           ? "https://igp.rs.gov.br/themes/modelo-noticias/images/outros/GD_imgSemImagem.png"
-                          : article.urlToImage,
+                          : article.urlToImage!,
                       placeholder: (context, url) =>
                           const Center(child: CircularProgressIndicator()),
                       fit: BoxFit.cover,
@@ -100,7 +100,7 @@ class ArticleListTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30.0),
               ),
               child: Text(
-                article.author == null ? "Sem autor" : article.author,
+                article.author == null ? "Sem autor" : article.author!,
                 style: const TextStyle(
                   color: Colors.white,
                 ),
@@ -110,7 +110,7 @@ class ArticleListTile extends StatelessWidget {
               height: 8.0,
             ),
             Text(
-              article.title,
+              article.title == null ? "Sem Titulo" : article.title!,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16.0,
